@@ -1,0 +1,57 @@
+import tkinter as tk
+from tkinter import *
+
+root = tk.Tk()
+root.title("Temperature Conversion")
+root.geometry("400x200")
+root.configure(bg = "#181818")
+
+titleLable = tk.Label(root, text = "Temperature to convert", font = ("Bahnschrift Semibold Condensed", 20), bg = "#1E1E1E", fg = "#A5A5A5")
+titleLable.pack()
+
+def tempToFaren():
+    temp = float(enterTemp.get())
+    farenTemp = "%.2f" % round(9/5 * temp + 32,2)
+    response.config(text = farenTemp + "F")
+    
+def tempToCelcius():
+    temp = float(enterTemp.get())
+    celciusTemp = "%.2f" % round((temp - 32) * 5/9,2)
+    response.config(text = celciusTemp + "C")
+
+switchValue = True
+    
+def toggle():
+    global switchValue
+    if switchValue == True:
+        lightButton.config(bg = "white", fg = "#1E1E1E", activebackground = "white", text = "Light")
+        root.configure(bg = "white")
+        farenButton.configure(bg = "white", fg = "#1E1E1E")
+        celciusButton.configure(bg = "white", fg = "#1E1E1E")
+        titleLable.configure(bg = "white", fg = "#1E1E1E")
+        response.configure(bg = "white", fg = "#1E1E1E")
+        switchValue = False
+    else:
+        lightButton.configure(bg = "#1E1E1E", fg = "white", activebackground = "white", text = "Dark" )
+        root.configure(bg = "#1E1E1E")
+        farenButton.configure(bg = "#1E1E1E", fg = "#A5A5A5")
+        celciusButton.configure(bg = "#1E1E1E", fg = "#A5A5A5")
+        titleLable.configure(bg = "#1E1E1E", fg = "#A5A5A5")
+        response.configure(bg = "#1E1E1E", fg = "#A5A5A5")
+        switchValue = True
+    
+
+enterTemp = tk.Entry(root)
+enterTemp.pack()
+
+farenButton = tk.Button(root, text = "to Fahrenheit", command = tempToFaren, bg = "#1E1E1E",fg = "#A5A5A5", font = ("Adobe Caslon Pro Bold", 10), relief = GROOVE)
+farenButton.pack(pady= 5)
+
+celciusButton = tk.Button(root, text = "to Celcius", bg = "#1E1E1E", fg = "#A5A5A5", command = tempToCelcius, font = ("Adobe Caslon Pro Bold", 10), relief = GROOVE)
+celciusButton.pack(pady= 5)
+
+response = tk.Label(root, text="", font=("Arial", 14), bg = "#1E1E1E", fg = "#A5A5A5")
+response.pack()
+
+lightButton = Button(root, text="Dark", command  = toggle, bg = "#1E1E1E", fg = "white")
+lightButton.place(relx = 0.0, rely = 0.0) 
