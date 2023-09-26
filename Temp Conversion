@@ -1,3 +1,28 @@
+
+'''
+Temperature Conversion
+
+This program will promtp the user to enter a temperature, click a button
+and convert the entered temperature to either Celcius or Farenheit
+'''
+
+"""
+Name: M06 EX1 - Temperature Conversion
+Author: Cody Dalton
+Date: 9/26/2023
+Version:1
+
+Write a GUI program that converts Celsius temperatures to Fahrenheit temperatures. 
+The user should be able to enter a Celsius temperature, 
+click a button, then see the equivalent Fahrenheit temperature
+
+Variables:
+temp = Temperature you want to convert
+
+"""
+
+
+#============================================= creating the main tkinter window
 import tkinter as tk
 from tkinter import *
 
@@ -9,18 +34,22 @@ root.configure(bg = "#181818")
 titleLable = tk.Label(root, text = "Temperature to convert", font = ("Bahnschrift Semibold Condensed", 20), bg = "#1E1E1E", fg = "#A5A5A5")
 titleLable.pack()
 
+#============================================== function for converting to Farentheit
 def tempToFaren():
     temp = float(enterTemp.get())
     farenTemp = "%.2f" % round(9/5 * temp + 32,2)
     response.config(text = farenTemp + "F")
-    
+
+#============================================== function for converting to Celcuis    
 def tempToCelcius():
     temp = float(enterTemp.get())
     celciusTemp = "%.2f" % round((temp - 32) * 5/9,2)
     response.config(text = celciusTemp + "C")
 
 switchValue = True
-    
+
+
+#============================================== function for the light/dark toggle mode    
 def toggle():
     global switchValue
     if switchValue == True:
@@ -30,6 +59,7 @@ def toggle():
         celciusButton.configure(bg = "white", fg = "#1E1E1E")
         titleLable.configure(bg = "white", fg = "#1E1E1E")
         response.configure(bg = "white", fg = "#1E1E1E")
+        enterTemp.configure(bg = "white", fg = "#1E1E1E")
         switchValue = False
     else:
         lightButton.configure(bg = "#1E1E1E", fg = "white", activebackground = "white", text = "Dark" )
@@ -38,10 +68,12 @@ def toggle():
         celciusButton.configure(bg = "#1E1E1E", fg = "#A5A5A5")
         titleLable.configure(bg = "#1E1E1E", fg = "#A5A5A5")
         response.configure(bg = "#1E1E1E", fg = "#A5A5A5")
+        enterTemp.configure(bg = "#1E1E1E", fg = "#A5A5A5")
         switchValue = True
     
-
+#================================================= tkinter buttons, and labels
 enterTemp = tk.Entry(root)
+enterTemp.configure(bg = "#1E1E1E", fg = "#A5A5A5")
 enterTemp.pack()
 
 farenButton = tk.Button(root, text = "to Fahrenheit", command = tempToFaren, bg = "#1E1E1E",fg = "#A5A5A5", font = ("Adobe Caslon Pro Bold", 10), relief = GROOVE)
@@ -55,3 +87,6 @@ response.pack()
 
 lightButton = Button(root, text="Dark", command  = toggle, bg = "#1E1E1E", fg = "white")
 lightButton.place(relx = 0.0, rely = 0.0) 
+
+
+root.mainloop()
