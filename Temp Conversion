@@ -85,7 +85,7 @@ celciusButton.pack(pady= 5)
 response = tk.Label(root, text="", font=("Arial", 14), bg = "#1E1E1E", fg = "#A5A5A5")
 response.pack()
 
-lightButton = Button(root, text="Dark", command  = toggle, bg = "#1E1E1E", fg = "white")
+lightButton = Button(root, text="Dark", command  = toggle, bg = "#1E1E1E", fg = "white", relief = GROOVE)
 lightButton.place(relx = 0.0, rely = 0.0) 
 
 
