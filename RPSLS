@@ -1,0 +1,187 @@
+import tkinter as tk
+import random
+from tkinter import *
+
+
+userScore = 0
+compScore = 0
+userChoice = ''
+compChoice = ''
+guesses = 0
+
+root = tk.Tk()
+
+root.geometry("400x520")
+root.title("Rock Paper Scissors Lizard Spock Game")
+root.configure(bg = "#181818")
+
+guesses = 0
+
+def yourGuesses():
+    global guesses
+    guesses = int(howManyPoint.get())
+    numberGuesses.configure(text = guesses)
+    return guesses
+
+def rock():
+    global userScore, numGuesses, guesses
+    userChoice = "Rock"
+    compChoice = computerRandomChoice()
+    result(userChoice, compChoice)
+             
+def paper():
+    global userScore, numGuesses, guesses
+    userChoice = "Paper"
+    compChoice = computerRandomChoice()
+    result(userChoice, compChoice)
+
+def scissors():
+    global userScore, numGuesses, guesses
+    userChoice = "Scissors"
+    compChoice = computerRandomChoice()
+    result(userChoice, compChoice)
+
+def lizard():
+    global userScore, numGuesses, guesses
+    userChoice = "Lizard"
+    compChoice = computerRandomChoice()
+    result(userChoice, compChoice)
+
+def spock():
+    global userScore, numGuesses, guesses
+    userChoice = "Spock"
+    compChoice = computerRandomChoice()
+    result(userChoice, compChoice)
+   
+def result(userChoice, compChoice):
+    global userScore, compScore
+    user = choiceToNumber(userChoice)
+    computer = choiceToNumber(compChoice)    
+    if userScore >= guesses:
+        shoutOutLabel.configure(text = "You won!")
+        print(guesses, "Guesses")
+        print(userScore, "Uscore")
+        buttonLock()
+
+    elif compScore >= guesses:
+        shoutOutLabel.configure(text = "Computer won!")
+        print(guesses, "Guesses")
+        print(compScore, "CompScore")
+        buttonLock()
+    
+    if (user == computer):
+        print("Tie")
+        playerChoiceLabel.configure(text = userChoice)
+        computerChoiceLabel.configure(text = compChoice)
+        
+    elif ((user-computer)%3 == 1):
+        print("You Win")
+        userScore += 1
+        playerScoreLabel.configure(text = userScore)
+        playerChoiceLabel.configure(text = userChoice)
+        computerChoiceLabel.configure(text = compChoice)
+        
+    else:
+        print("Computer wins")
+        compScore += 1
+        computerScoreLabel.configure(text = compScore)
+        playerChoiceLabel.configure(text = userChoice)
+        computerChoiceLabel.configure(text = compChoice)
+                
+def choiceToNumber(choice):
+    choiceDict = {"Rock":0, "Paper":1, "Scissors":2, "Lizard":3, "Spock":4}
+    return choiceDict[choice]
+    
+def computerRandomChoice():
+    return random.choice(["Rock", "Paper", "Scissors", "Lizard", "Spock"])
+
+        
+def resetValues():
+    global userScore, compScore
+    guesses = 0
+    numberGuesses.configure(text = guesses)
+    howManyPoint.configure(text = "")
+    shoutOutLabel.configure(text = "")
+    playerChoiceLabel.configure(text = "")
+    computerChoiceLabel.configure(text = "")
+    computerScoreLabel.configure(text = "")
+    playerScoreLabel.configure(text = "")
+    compScore = 0
+    rockButton.configure(state=NORMAL)
+    scissorsButton.configure(state=NORMAL)
+    paperButton.configure(state=NORMAL)
+    lizardButton.configure(state=NORMAL)
+    spockButton.configure(state=NORMAL)
+    enterButton.configure(state=NORMAL)
+    
+def buttonLock():
+    rockButton.config(state=DISABLED)
+    scissorsButton.config(state=DISABLED)
+    paperButton.config(state=DISABLED)
+    lizardButton.config(state=DISABLED)
+    spockButton.config(state=DISABLED)
+    enterButton.config(state=DISABLED)
+    
+    
+reset = Button(text="Reset", command=resetValues,bg = "#1E1E1E", fg = "#A5A5A5", font = ("Adobe Caslon Pro Bold", 10), relief = GROOVE)
+reset.place(x=0, y=0)
+
+    
+enterFrame = tk.Frame(root, bg = "#181818")
+titleLable = tk.Label(enterFrame, text = "Number of Guesses", font = ("Bahnschrift Semibold Condensed", 35), bg = "#1E1E1E", fg = "#A5A5A5").pack(side = TOP, expand = True)
+howManyPoint = tk.Entry(enterFrame, bg = "#1E1E1E", fg = "#A5A5A5")
+enterButton = tk.Button(enterFrame, text = "Enter", bg = "#1E1E1E", fg = "#A5A5A5", command = (yourGuesses) , font = ("Adobe Caslon Pro Bold", 10), relief = GROOVE)
+howManyPoint.pack(side = TOP)
+enterFrame.pack()
+enterButton.pack(side = BOTTOM, expand = True, pady = 2, padx = 2)
+
+topFrame = tk.Frame(root, bg = "#181818")
+yourChoices = tk.Label(topFrame, text = "Your choices",font = ("Bahnschrift Semibold Condensed", 30), bg = "#181818", fg = "#A5A5A5").pack(expand = True)
+rockButton = tk.Button(topFrame, text = "Rock", bg = "#1E1E1E",fg = "#A5A5A5", command = (rock),  font = ("Adobe Caslon Pro Bold", 15), relief = GROOVE)
+scissorsButton = tk.Button(topFrame, text = "Scissors", bg = "#1E1E1E", fg = "#A5A5A5", command = (scissors) , font = ("Adobe Caslon Pro Bold", 15), relief = GROOVE)
+paperButton = tk.Button(topFrame, text = "Paper", bg = "#1E1E1E", fg = "#A5A5A5", command = (paper) , font = ("Adobe Caslon Pro Bold", 15), relief = GROOVE)
+lizardButton = tk.Button(topFrame, text = "Lizard", bg = "#1E1E1E", fg = "#A5A5A5", command = (lizard) , font = ("Adobe Caslon Pro Bold", 15), relief = GROOVE)
+spockButton = tk.Button(topFrame, text = "Spock", bg = "#1E1E1E", fg = "#A5A5A5", command = (spock) , font = ("Adobe Caslon Pro Bold", 15), relief = GROOVE)
+topFrame.pack(side = TOP)
+rockButton.pack(side = LEFT, expand = True, pady = 2, padx = 2)
+scissorsButton.pack(side = LEFT, expand = True, pady = 2, padx = 2)
+paperButton.pack(side = LEFT, expand = True, pady = 2, padx = 2)
+lizardButton.pack(side = LEFT, expand = True, pady = 2, padx = 2)
+spockButton.pack(side = LEFT, expand = True, pady = 2, padx = 2)
+
+guessesFrame = tk.Frame(root, bg = "#181818")
+guessesLeft = tk.Label(guessesFrame, text = "Points to Win", bg = "#181818", fg = "#A5A5A5", font = ("Adobe Caslon Pro Bold", 20)).pack(expand = True, pady = 2, padx = 2)
+numberGuesses = tk.Label(guessesFrame, text="", font=("Arial", 14), bg = "#181818", fg = "#A5A5A5")
+numberGuesses.pack(side = BOTTOM, expand = True, pady = 2, padx = 2)
+guessesFrame.pack(side = TOP)
+
+playerChoiceFrame = tk.Frame(root, bg = "#181818")
+playerChoice = tk.Label(playerChoiceFrame, text = "Player's Choice", bg = "#181818", fg = "#A5A5A5", font = ("Adobe Caslon Pro Bold", 15)).pack(expand = True, pady = 2, padx = 2)
+playerChoiceLabel = tk.Label(playerChoiceFrame, text="", font=("Arial", 14), bg = "#181818", fg = "#A5A5A5")
+playerChoiceLabel.pack(side = TOP, expand = True, pady = 2, padx = 2)
+playerChoiceFrame.pack(side = RIGHT, expand = True, pady = 2, padx = 2)
+
+computerChoiceFrame = tk.Frame(root, bg = "#181818")
+computerChoice = tk.Label(computerChoiceFrame, text = "Computer's Choice", bg = "#181818", fg = "#A5A5A5", font = ("Adobe Caslon Pro Bold", 15)).pack(expand = True, pady = 2, padx = 2)
+computerChoiceLabel = tk.Label(computerChoiceFrame, text="", font=("Arial", 14), bg = "#181818", fg = "#A5A5A5")
+computerChoiceLabel.pack(side = TOP, expand = True, pady = 2, padx = 2)
+computerChoiceFrame.pack(side = LEFT, expand = True, pady = 2, padx = 2)
+
+computerScoreFrame = tk.Frame(computerChoiceFrame, bg = "#181818")
+computerScore = tk.Label(computerScoreFrame, text = "Computer's Score", bg = "#181818", fg = "#A5A5A5", font = ("Adobe Caslon Pro Bold", 15)).pack(expand = True, pady = 2, padx = 2)
+computerScoreLabel = tk.Label(computerScoreFrame, text="", font=("Arial", 14), bg = "#181818", fg = "#A5A5A5")
+computerScoreLabel.pack(side = BOTTOM, pady = 2, padx = 2)
+computerScoreFrame.pack(expand = True, pady = 2, padx = 2)
+
+playerScoreFrame = tk.Frame(playerChoiceFrame, bg = "#181818")
+playerScore = tk.Label(playerScoreFrame, text = "Player's Score", bg = "#181818", fg = "#A5A5A5", font = ("Adobe Caslon Pro Bold", 15)).pack(expand = True, pady = 2, padx = 2)
+playerScoreLabel = tk.Label(playerScoreFrame, text="", font=("Arial", 14), bg = "#181818", fg = "#A5A5A5")
+playerScoreLabel.pack(side = BOTTOM, pady = 2, padx = 2)
+playerScoreFrame.pack(expand = True, pady = 2, padx = 2)
+
+shoutOutFrame = tk.Frame(guessesFrame, bg = "white")
+shoutOutLabel = tk.Label(shoutOutFrame, text="", font=("Arial", 14), bg = "#181818", fg = "#A5A5A5")
+shoutOutFrame.pack(side = BOTTOM)
+shoutOutLabel.pack( expand = True, fill = BOTH)
+
+root.mainloop()
