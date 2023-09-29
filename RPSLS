@@ -57,17 +57,6 @@ def result(userChoice, compChoice):
     global userScore, compScore
     user = choiceToNumber(userChoice)
     computer = choiceToNumber(compChoice)    
-    if userScore >= guesses:
-        shoutOutLabel.configure(text = "You won!")
-        print(guesses, "Guesses")
-        print(userScore, "Uscore")
-        buttonLock()
-
-    elif compScore >= guesses:
-        shoutOutLabel.configure(text = "Computer won!")
-        print(guesses, "Guesses")
-        print(compScore, "CompScore")
-        buttonLock()
     
     if (user == computer):
         print("Tie")
@@ -87,7 +76,19 @@ def result(userChoice, compChoice):
         computerScoreLabel.configure(text = compScore)
         playerChoiceLabel.configure(text = userChoice)
         computerChoiceLabel.configure(text = compChoice)
-                
+    
+    if userScore >= guesses:
+        shoutOutLabel.configure(text = "You won!")
+        print(guesses, "Guesses")
+        print(userScore, "Uscore")
+        buttonLock()
+
+    elif compScore >= guesses:
+        shoutOutLabel.configure(text = "Computer won!")
+        print(guesses, "Guesses")
+        print(compScore, "CompScore")
+        buttonLock()
+        
 def choiceToNumber(choice):
     choiceDict = {"Rock":0, "Paper":1, "Scissors":2, "Lizard":3, "Spock":4}
     return choiceDict[choice]
@@ -107,6 +108,7 @@ def resetValues():
     computerScoreLabel.configure(text = "")
     playerScoreLabel.configure(text = "")
     compScore = 0
+    userScore = 0
     rockButton.configure(state=NORMAL)
     scissorsButton.configure(state=NORMAL)
     paperButton.configure(state=NORMAL)
