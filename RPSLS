@@ -25,58 +25,144 @@ def yourGuesses():
 
 def rock():
     global userScore, numGuesses, guesses
-    userChoice = "Rock"
+    userChoice = "rock"
     compChoice = computerRandomChoice()
     result(userChoice, compChoice)
              
 def paper():
     global userScore, numGuesses, guesses
-    userChoice = "Paper"
+    userChoice = "paper"
     compChoice = computerRandomChoice()
     result(userChoice, compChoice)
 
 def scissors():
     global userScore, numGuesses, guesses
-    userChoice = "Scissors"
+    userChoice = "scissors"
     compChoice = computerRandomChoice()
     result(userChoice, compChoice)
 
 def lizard():
     global userScore, numGuesses, guesses
-    userChoice = "Lizard"
+    userChoice = "lizard"
     compChoice = computerRandomChoice()
     result(userChoice, compChoice)
 
 def spock():
     global userScore, numGuesses, guesses
-    userChoice = "Spock"
+    userChoice = "spock"
     compChoice = computerRandomChoice()
     result(userChoice, compChoice)
    
 def result(userChoice, compChoice):
     global userScore, compScore
-    user = choiceToNumber(userChoice)
-    computer = choiceToNumber(compChoice)    
+    user = (userChoice)
+    computer = (compChoice)    
     
-    if (user == computer):
-        print("Tie")
+    if user == computer:
+        print(f"Both players selected {user}. It's a tie!")
         playerChoiceLabel.configure(text = userChoice)
         computerChoiceLabel.configure(text = compChoice)
-        
-    elif ((user-computer)%3 == 1):
-        print("You Win")
-        userScore += 1
-        playerScoreLabel.configure(text = userScore)
-        playerChoiceLabel.configure(text = userChoice)
-        computerChoiceLabel.configure(text = compChoice)
-        
-    else:
-        print("Computer wins")
-        compScore += 1
-        computerScoreLabel.configure(text = compScore)
-        playerChoiceLabel.configure(text = userChoice)
-        computerChoiceLabel.configure(text = compChoice)
-    
+    elif user == "scissors":
+        if computer == "paper":
+            userScore += 1
+            playerScoreLabel.configure(text = userScore)
+            playerChoiceLabel.configure(text = userChoice)
+            computerChoiceLabel.configure(text = compChoice)
+        else:
+            compScore += 1
+            computerScoreLabel.configure(text = compScore)
+            playerChoiceLabel.configure(text = userChoice)
+            computerChoiceLabel.configure(text = compChoice)
+    elif user == "paper":
+        if computer == "rock":
+            userScore += 1
+            playerScoreLabel.configure(text = userScore)
+            playerChoiceLabel.configure(text = userChoice)
+            computerChoiceLabel.configure(text = compChoice)
+        else:
+            compScore += 1
+            computerScoreLabel.configure(text = compScore)
+            playerChoiceLabel.configure(text = userChoice)
+            computerChoiceLabel.configure(text = compChoice)
+    elif user == "rock":
+        if computer == "lizard":
+            print("Scissors cuts paper! You win!")
+            userScore += 1
+            playerScoreLabel.configure(text = userScore)
+            playerChoiceLabel.configure(text = userChoice)
+            computerChoiceLabel.configure(text = compChoice)
+        else:
+            compScore += 1
+            computerScoreLabel.configure(text = compScore)
+            playerChoiceLabel.configure(text = userChoice)
+            computerChoiceLabel.configure(text = compChoice)
+    elif user == "lizard":
+        if computer == "spock":
+            userScore += 1
+            playerScoreLabel.configure(text = userScore)
+            playerChoiceLabel.configure(text = userChoice)
+            computerChoiceLabel.configure(text = compChoice)
+        else:
+            compScore += 1
+            computerScoreLabel.configure(text = compScore)
+            playerChoiceLabel.configure(text = userChoice)
+            computerChoiceLabel.configure(text = compChoice)
+    elif user == "spock":
+        if computer == "scissors":
+            userScore += 1
+            playerScoreLabel.configure(text = userScore)
+            playerChoiceLabel.configure(text = userChoice)
+            computerChoiceLabel.configure(text = compChoice)
+        else:
+            compScore += 1
+            computerScoreLabel.configure(text = compScore)
+            playerChoiceLabel.configure(text = userChoice)
+            computerChoiceLabel.configure(text = compChoice)
+    elif user == "scissors":
+        if computer == "lizard":
+            userScore += 1
+            playerScoreLabel.configure(text = userScore)
+            playerChoiceLabel.configure(text = userChoice)
+            computerChoiceLabel.configure(text = compChoice)
+        else:
+            compScore += 1
+            computerScoreLabel.configure(text = compScore)
+            playerChoiceLabel.configure(text = userChoice)
+            computerChoiceLabel.configure(text = compChoice)
+    elif user == "lizard":
+        if computer == "paper":
+            userScore += 1
+            playerScoreLabel.configure(text = userScore)
+            playerChoiceLabel.configure(text = userChoice)
+            computerChoiceLabel.configure(text = compChoice)
+        else:
+            computerScore += 1
+            computerScoreLabel.configure(text = compScore)
+            playerChoiceLabel.configure(text = userChoice)
+            computerChoiceLabel.configure(text = compChoice)
+    elif user == "paper":
+        if computer == "spock":
+            userScore += 1
+            playerScoreLabel.configure(text = userScore)
+            playerChoiceLabel.configure(text = userChoice)
+            computerChoiceLabel.configure(text = compChoice)
+        else:
+            compScore += 1
+            computerScoreLabel.configure(text = compScore)
+            playerChoiceLabel.configure(text = userChoice)
+            computerChoiceLabel.configure(text = compChoice)
+    elif user == "spock":
+        if computer == "rock":
+            userScore += 1
+            playerScoreLabel.configure(text = userScore)
+            playerChoiceLabel.configure(text = userChoice)
+            computerChoiceLabel.configure(text = compChoice)
+        else:
+            compScore += 1
+            computerScoreLabel.configure(text = compScore)
+            playerChoiceLabel.configure(text = userChoice)
+            computerChoiceLabel.configure(text = compChoice)
+                      
     if userScore >= guesses:
         shoutOutLabel.configure(text = "You won!")
         print(guesses, "Guesses")
@@ -89,12 +175,8 @@ def result(userChoice, compChoice):
         print(compScore, "CompScore")
         buttonLock()
         
-def choiceToNumber(choice):
-    choiceDict = {"Rock":0, "Paper":1, "Scissors":2, "Lizard":3, "Spock":4}
-    return choiceDict[choice]
-    
 def computerRandomChoice():
-    return random.choice(["Rock", "Paper", "Scissors", "Lizard", "Spock"])
+    return random.choice(["rock", "paper", "scissors", "lizard", "spock"])
 
         
 def resetValues():
